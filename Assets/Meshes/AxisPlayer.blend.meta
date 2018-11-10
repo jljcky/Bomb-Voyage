@@ -95,7 +95,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Charge
       takeName: Charge
-      firstFrame: -1
+      firstFrame: 0
       lastFrame: 0
       wrapMode: 0
       orientationOffsetY: 0
