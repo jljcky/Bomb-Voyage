@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	private int Health;
-	private int bombCharge;
-	private int maxCharge = 5;
+	private float bombCharge;
+	private float maxCharge = 5;
 	private Rigidbody rb;
 
 	// Use this for initialization
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 		//Increase Bomb Charges
 		if (bombCharge > 0 && bombCharge < maxCharge)
-			bombCharge += 1 * Time.deltaTime;	
+			bombCharge += 1f * Time.deltaTime;	
 	}
 
 	//Grab Bomb, and if already holding then throw
@@ -51,6 +51,10 @@ public class Player : MonoBehaviour {
 	}
 	public void jump(){
 
+	}
+
+	public void getHit(){
+		
 	}
 
 }
