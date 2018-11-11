@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 114246877053451406}
   - component: {fileID: 54485331007312484}
   - component: {fileID: 136266061422467786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AllyPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

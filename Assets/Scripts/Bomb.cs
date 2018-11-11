@@ -16,7 +16,13 @@ public class Bomb : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        print("BOOM");
+        Collider[] collidersNearby = Physics.OverlapSphere(transform.position, 5f);
+        foreach (Collider c in collidersNearby){
+            if (c.gameObject.layer == 9)
+            {
+                c.GetComponent<Rigidbody>().AddExplosionForce(750f, transform.position, 50f, 3f);
+            }
+        }
         Destroy(gameObject);
     }
 }
