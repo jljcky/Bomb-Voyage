@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 95900133614135778}
   - component: {fileID: 114520596484883676}
   - component: {fileID: 54282087500797450}
+  - component: {fileID: 136268495526801924}
   m_Layer: 0
   m_Name: AxisPlayer
   m_TagString: Untagged
@@ -755,6 +756,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1877cfca0dc004f987514488f8b415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &136268495526801924
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692002506427844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.087554
+  m_Height: 7.331868
+  m_Direction: 1
+  m_Center: {x: 0.00952673, y: 3.165934, z: 0.059156418}
 --- !u!137 &137232160158607206
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
