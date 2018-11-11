@@ -77,4 +77,9 @@ public class GameSystem : MonoBehaviour {
 	private void fellOff(GameObject player){
 
 	}
+
+	private void winGame(GameObject player){
+
+	}
+
 }
