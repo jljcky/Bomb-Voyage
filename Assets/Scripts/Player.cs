@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	private int Health;
 	private int bombCharge;
+	private int maxCharge = 5;
 	private Rigidbody rb;
 
 	// Use this for initialization
@@ -17,8 +18,8 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Increase Bomb Charges
-		if (bombCharge > 0 && bombCharge < 100)
-			bombCharge += 1;	
+		if (bombCharge > 0 && bombCharge < maxCharge)
+			bombCharge += 1 * Time.deltaTime;	
 	}
 
 	//Grab Bomb, and if already holding then throw
