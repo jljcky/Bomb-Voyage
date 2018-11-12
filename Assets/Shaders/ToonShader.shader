@@ -7,7 +7,7 @@
         _ShadeColor ("Shade Color", Color) = (0, 0, 0, 1)
         _Threshold ("Threshold", Range (-1, 1)) = 0
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
-        _OutlineWidth ("Outline Width", Range(0, 0.3)) = 0.01
+        _OutlineWidth ("Outline Width", Range(0.01, 0.3)) = 0.1
 	}
 	SubShader
 	{

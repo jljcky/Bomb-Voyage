@@ -69,8 +69,11 @@ ModelImporter:
     7400004: Idle
     7400006: Throw
     7400008: Walk
+    7400010: Jump
     9500000: //RootNode
     13700000: Player
+    13700002: Helmet_1
+    13700004: Helmet_2
   externalObjects: {}
   materials:
     importMaterials: 1
