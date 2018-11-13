@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 114131113624201518}
   - component: {fileID: 54411016999463934}
   - component: {fileID: 136007705947911398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AxisPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &95752586923155244
 Animator:
@@ -766,7 +766,7 @@ Animator:
   m_GameObject: {fileID: 1410225956072682}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f64c568664d0f4db1980d57d57602d95, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b23f6f157c4c44f8fb0c919623b50fca, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -786,6 +786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1877cfca0dc004f987514488f8b415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputs: {x: 0, y: 0}
+  isStunned: 0
 --- !u!136 &136007705947911398
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -814,7 +816,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100002, guid: f64c568664d0f4db1980d57d57602d95, type: 3}
+  - {fileID: 2100000, guid: b1df990825e2744b4a6d08902f0d74c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -881,7 +883,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f64c568664d0f4db1980d57d57602d95, type: 3}
+  - {fileID: 2100000, guid: f23793ab466ce4f2d97e3bf883aea6d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

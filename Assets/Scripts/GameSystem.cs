@@ -18,7 +18,9 @@ public class GameSystem : MonoBehaviour {
 	void Start () {
 		allyPlayerObject = Instantiate (allyPlayerPrefab);
 		axisPlayerObject = Instantiate (axisPlayerPrefab);
-		allyPlayer = allyPlayerObject.GetComponent<Player> ();
+        allyPlayerObject.transform.position = new Vector3(-1f, 1f, 0f);
+        axisPlayerObject.transform.position = new Vector3(1f, 1f, 0f);
+        allyPlayer = allyPlayerObject.GetComponent<Player> ();
 		axisPlayer = axisPlayerObject.GetComponent<Player> ();
 	}
 	
@@ -26,59 +28,85 @@ public class GameSystem : MonoBehaviour {
 	void Update () {
 		//Check if any Player fell off
 		if (allyPlayerObject.transform.position.y < minimumHeight){
-			fellOff (allyPlayerObject);
+			FellOff (allyPlayerObject);
 		}
 		if (axisPlayerObject.transform.position.y < minimumHeight){
-			fellOff (axisPlayerObject);
+			FellOff (axisPlayerObject);
 		}
 
-		//Ally Player Movement
+        //Ally Player Movement
+        allyPlayer.inputs = Vector2.zero;
 		if (Input.GetKey (KeyCode.W)) {
-			allyPlayer.moveUp();
-		}
+            //allyPlayer.MoveUp();
+            allyPlayer.inputs.y += 1f;
+        }
 		if (Input.GetKey (KeyCode.A)) {
-			allyPlayer.moveLeft();
-		}
+            //allyPlayer.MoveLeft();
+            allyPlayer.inputs.x -= 1f;
+        }
 		if (Input.GetKey (KeyCode.S)) {
-			allyPlayer.moveRight();
-		}
+            //allyPlayer.MoveRight();
+            allyPlayer.inputs.y -= 1f;
+        }
 		if (Input.GetKey (KeyCode.D)) {
-			allyPlayer.moveDown();
-		}
+            //allyPlayer.MoveDown();
+            allyPlayer.inputs.x += 1f;
+        }
 		if (Input.GetKey (KeyCode.E)) {
-			allyPlayer.grabBomb();
+			allyPlayer.GrabBomb();
 		}
 		if (Input.GetKey (KeyCode.R)) {
-			allyPlayer.jump();
+			allyPlayer.Jump();
 		}
+        if (allyPlayer.inputs != Vector2.zero && !allyPlayer.isStunned)
+        {
+            allyPlayer.Move();
+            allyPlayer.GetComponent<Animator>().Play("Walk");
+        }
+        else{
+            allyPlayer.GetComponent<Animator>().Play("Idle");
+        }
 
-		//Axis Player Movement
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			axisPlayer.moveUp();
-		}
+        //Axis Player Movement
+        axisPlayer.inputs = Vector2.zero;
+        if (Input.GetKey (KeyCode.UpArrow)) {
+            //axisPlayer.MoveUp();
+            axisPlayer.inputs.y += 1f;
+        }
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			axisPlayer.moveLeft();
-		}
+            //axisPlayer.MoveLeft();
+            axisPlayer.inputs.x -= 1f;
+        }
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			axisPlayer.moveRight();
-		}
+            //axisPlayer.MoveRight();
+            axisPlayer.inputs.x += 1f;
+        }
 		if (Input.GetKey (KeyCode.DownArrow)) {
-			axisPlayer.moveDown();
-		}
+            //axisPlayer.MoveDown();
+            axisPlayer.inputs.y -= 1f;
+        }
 		if (Input.GetKey (KeyCode.Period)) {
-			allyPlayer.grabBomb();
+			axisPlayer.GrabBomb();
 		}
 		if (Input.GetKey (KeyCode.Slash)) {
-			allyPlayer.jump ();
-		}
-
-	}
+			axisPlayer.Jump ();
+        }
+        if (axisPlayer.inputs != Vector2.zero && !axisPlayer.isStunned)
+        {
+            axisPlayer.Move();
+            axisPlayer.GetComponent<Animator>().Play("Walk");
+        }
+        else
+        {
+            axisPlayer.GetComponent<Animator>().Play("Idle");
+        }
+    }
 		
-	private void fellOff(GameObject player){
+	private void FellOff(GameObject player){
 
 	}
 
-	private void winGame(GameObject player){
+	private void WinGame(GameObject player){
 
 	}
 
