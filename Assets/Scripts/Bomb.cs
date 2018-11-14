@@ -21,7 +21,7 @@ public class Bomb : MonoBehaviour {
             if (c.gameObject.layer == 9)
             {
                 c.GetComponent<Player>().GetHit();
-                c.GetComponent<Rigidbody>().AddExplosionForce(750f, transform.position, 50f, 3f);
+                c.GetComponent<Rigidbody>().AddExplosionForce(1000f, transform.position, 50f, 3f);
             }
         }
         Destroy(gameObject);

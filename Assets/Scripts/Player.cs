@@ -13,10 +13,11 @@ public class Player : MonoBehaviour {
     public Vector2 inputs;
 
     public bool isStunned = false;
+    public bool isGrounded = false;
     private Quaternion prevRot;
 
-    private float stunnedGrounded = 1f;
-    private float stunnedGroundedCD = 0f;
+    private float stunned = 1f;
+    private float stunnedCD = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -26,41 +27,71 @@ public class Player : MonoBehaviour {
     }
 
 
-// Update is called once per frame
-void Update () {
+    // Update is called once per frame
+    void Update () {
 		//Increase Bomb Charges
 		if (bombCharge > 0 && bombCharge < maxCharge)
 			bombCharge += 1f * Time.deltaTime;
-	}
+        if (isStunned && isGrounded)
+        {
+            if (stunnedCD >= stunned)
+            {
+                isStunned = false;
+                stunnedCD = 0f;
+                Recover();
+            }
+            else
+            {
+                stunnedCD += Time.deltaTime;
+            }
+        }else{
+            stunnedCD = 0f;
+        }
+    }
+
+    //void OnTriggerStay(Collider other)
+    //{
+    //    if (isStunned)
+    //    {
+    //        if (other.tag == "Terrain")
+    //        {
+    //            if (stunnedGroundedCD >= stunnedGrounded)
+    //            {
+    //                isStunned = false;
+    //                stunnedGroundedCD = 0f;
+    //                Recover();
+    //            }
+    //            else
+    //            {
+    //                stunnedGroundedCD += Time.deltaTime;
+    //            }
+    //        }
+    //    }
+    //}
+
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (isStunned)
+    //    {
+    //        if (other.tag == "Terrain")
+    //        {
+    //            stunnedGroundedCD = 0;
+    //        }
+    //    }
+    //}
 
     void OnCollisionStay(Collision collision)
     {
-        if (isStunned)
+        ContactPoint[] contacts = collision.contacts;
+        foreach (ContactPoint contact in contacts)
         {
-            ContactPoint[] contacts = collision.contacts;
-            bool isGrounded = false;
-            foreach (ContactPoint contact in contacts)
-            {
-                if (contact.otherCollider.tag == "Terrain")
-                {
-                    if (stunnedGroundedCD >= stunnedGrounded)
-                    {
-                        isStunned = false;
-                        stunnedGroundedCD = 0f;
-                        Recover();
-                    }
-                    else
-                    {
-                        stunnedGroundedCD += Time.deltaTime;
-                    }
-                    isGrounded = true;
-                    break;
-                }
-            }
-            if (!isGrounded){
-                stunnedGroundedCD = 0f;
-            }
+            isGrounded |= contact.otherCollider.tag == "Terrain";
         }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        isGrounded = false;
     }
 
     //Grab Bomb, and if already holding then throw
@@ -104,7 +135,7 @@ void Update () {
     }
 
 	public void Jump(){
-
+        rb.AddForce(Vector3.up * 10f, ForceMode.VelocityChange);
 	}
 
     public void GetHit()
