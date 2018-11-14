@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BombThrowing
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/ArmIK_L
+    m_Weight: 1
+  - m_Path: Armature/ArmIK_R
+    m_Weight: 1
+  - m_Path: Armature/ArmIKPole_L
+    m_Weight: 1
+  - m_Path: Armature/ArmIKPole_R
+    m_Weight: 1
+  - m_Path: Armature/LegIK_L
+    m_Weight: 0
+  - m_Path: Armature/LegIK_R
+    m_Weight: 0
+  - m_Path: Armature/LegIKPole_L
+    m_Weight: 0
+  - m_Path: Armature/LegIKPole_R
+    m_Weight: 0
+  - m_Path: Armature/Torso
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest/Arm_L
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest/Arm_L/Forearm_L
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest/Arm_R
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest/Arm_R/Forearm_R
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest/Neck
+    m_Weight: 1
+  - m_Path: Armature/Torso/Chest/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/Torso/Leg_L
+    m_Weight: 0
+  - m_Path: Armature/Torso/Leg_L/Calf_L
+    m_Weight: 0
+  - m_Path: Armature/Torso/Leg_R
+    m_Weight: 0
+  - m_Path: Armature/Torso/Leg_R/Calf_R
+    m_Weight: 0
+  - m_Path: Helmet_1
+    m_Weight: 1
+  - m_Path: Helmet_2
+    m_Weight: 1
+  - m_Path: Player
+    m_Weight: 1

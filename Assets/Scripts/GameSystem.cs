@@ -60,7 +60,12 @@ public class GameSystem : MonoBehaviour {
             }
             if (Input.GetKey(KeyCode.E))
             {
-                allyPlayer.GrabBomb();
+                //allyPlayer.GrabBomb();
+                allyAnimator.SetBool("isCharging", true);
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                allyAnimator.SetBool("isCharging", false);
             }
             if (allyPlayer.inputs != Vector2.zero)
             {
@@ -101,7 +106,12 @@ public class GameSystem : MonoBehaviour {
                 axisPlayer.inputs.y -= 1f;
             }
     		if (Input.GetKey (KeyCode.Period)) {
-    			axisPlayer.GrabBomb();
+                //axisPlayer.GrabBomb();
+                axisAnimator.SetBool("isCharging", true);
+            }
+            if (Input.GetKeyUp(KeyCode.Period))
+            {
+                axisAnimator.SetBool("isCharging", false);
             }
             if (axisPlayer.inputs != Vector2.zero)
             {

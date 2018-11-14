@@ -29,9 +29,9 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		//Increase Bomb Charges
-		if (bombCharge > 0 && bombCharge < maxCharge)
-			bombCharge += 1f * Time.deltaTime;
+		////Increase Bomb Charges
+		//if (bombCharge > 0 && bombCharge < maxCharge)
+			//bombCharge += 1f * Time.deltaTime;
         if (isStunned && isGrounded)
         {
             if (stunnedCD >= stunned)
@@ -49,37 +49,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-    //void OnTriggerStay(Collider other)
-    //{
-    //    if (isStunned)
-    //    {
-    //        if (other.tag == "Terrain")
-    //        {
-    //            if (stunnedGroundedCD >= stunnedGrounded)
-    //            {
-    //                isStunned = false;
-    //                stunnedGroundedCD = 0f;
-    //                Recover();
-    //            }
-    //            else
-    //            {
-    //                stunnedGroundedCD += Time.deltaTime;
-    //            }
-    //        }
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (isStunned)
-    //    {
-    //        if (other.tag == "Terrain")
-    //        {
-    //            stunnedGroundedCD = 0;
-    //        }
-    //    }
-    //}
-
     void OnCollisionStay(Collision collision)
     {
         ContactPoint[] contacts = collision.contacts;
@@ -95,38 +64,18 @@ public class Player : MonoBehaviour {
     }
 
     //Grab Bomb, and if already holding then throw
-    public bool GrabBomb(){
-		if (bombCharge != 0) {
-			ThrowBomb ();
-			return false;
-		} else {
-			bombCharge = 1;
-			return true;
-		}
-	}
-	private void ThrowBomb (){
-
-	}
-
-	//Movement
-	//public void MoveUp(){
- //       rb.MovePosition(transform.forward * speed * Time.deltaTime);
+ //   public bool GrabBomb(){
+	//	if (bombCharge != 0) {
+	//		ThrowBomb ();
+	//		return false;
+	//	} else {
+	//		bombCharge = 1;
+	//		return true;
+	//	}
 	//}
+	//private void ThrowBomb (){
 
-	//public void MoveDown()
- //   {
- //       rb.MovePosition(-transform.forward * speed * Time.deltaTime);
- //   }
-
-	//public void MoveLeft()
- //   {
- //       rb.MovePosition(-transform.right * speed * Time.deltaTime);
- //   }
-
-	//public void MoveRight()
-    //{
-    //    rb.MovePosition(transform.right * speed * Time.deltaTime);
-    //}
+	//}
 
     public void Move(){
         Vector3 lookAt = new Vector3(inputs.x, 0.0f, inputs.y);
@@ -148,6 +97,5 @@ public class Player : MonoBehaviour {
     public void Recover(){
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         transform.localRotation = prevRot;
-        //rb.velocity = Vector3.zero;
     }
 }

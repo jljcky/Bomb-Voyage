@@ -154,7 +154,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1410225956072682, guid: 4dfeab37f23c576428f3ddfa9942e3eb, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dfeab37f23c576428f3ddfa9942e3eb, type: 2}
@@ -375,8 +375,8 @@ MonoBehaviour:
     type: 2}
   axisPlayerPrefab: {fileID: 1410225956072682, guid: 4dfeab37f23c576428f3ddfa9942e3eb,
     type: 2}
-  allyPlayerStartPosition: {x: 10, y: 1, z: 20}
-  axisPlayerStartPosition: {x: -10, y: 1, z: -20}
+  allyPlayerStartPosition: {x: -10, y: 1, z: 0}
+  axisPlayerStartPosition: {x: 10, y: 1, z: 0}
 --- !u!4 &574405124
 Transform:
   m_ObjectHideFlags: 0
@@ -561,7 +561,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1141584293091300, guid: 5b74fb15ac471c641870fe7dc0b4c24f, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b74fb15ac471c641870fe7dc0b4c24f, type: 2}
