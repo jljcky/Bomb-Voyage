@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
         }
     }
 
+    //if we want to use a raycast then we dont need these collision events
     void OnCollisionStay(Collision collision)
     {
         ContactPoint[] contacts = collision.contacts;
@@ -97,5 +98,9 @@ public class Player : MonoBehaviour {
     public void Recover(){
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         transform.localRotation = prevRot;
+        //set position
+        //Transform player = transform.Find("Player");
+        //Renderer playerMesh = player.GetComponent<Renderer>();
+        //transform.position = playerMesh.bounds.center;
     }
 }
