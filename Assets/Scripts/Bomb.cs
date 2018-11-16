@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour {
+    public GameObject explosion;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,7 @@ public class Bomb : MonoBehaviour {
                 c.GetComponent<Rigidbody>().AddExplosionForce(1000f, transform.position, 50f, 3f);
             }
         }
+        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }
