@@ -5,8 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	private int health;
-	private float bombCharge;
-	private float maxCharge = 5;
     private float speed;
 	private Rigidbody rb;
 
@@ -19,6 +17,11 @@ public class Player : MonoBehaviour {
     private float stunned = 1f;
     private float stunnedCD = 0f;
 
+	public GameObject bombPrefab;
+	private GameObject heldBomb;
+
+	public float playerMovementModifier = 0.4f;
+
 	// Use this for initialization
 	void Start () {
         health = 5;
@@ -29,9 +32,6 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		////Increase Bomb Charges
-		//if (bombCharge > 0 && bombCharge < maxCharge)
-			//bombCharge += 1f * Time.deltaTime;
         if (isStunned && isGrounded)
         {
             if (stunnedCD >= stunned)
@@ -65,34 +65,53 @@ public class Player : MonoBehaviour {
     }
 
     //Grab Bomb, and if already holding then throw
- //   public bool GrabBomb(){
-	//	if (bombCharge != 0) {
-	//		ThrowBomb ();
-	//		return false;
-	//	} else {
-	//		bombCharge = 1;
-	//		return true;
-	//	}
-	//}
-	//private void ThrowBomb (){
+    public void grabBomb(){
+		//if (heldBomb == null) {
+			heldBomb = Instantiate (bombPrefab, this.transform);
+			heldBomb.transform.localPosition = new Vector3(0, 8, 0);
+		//} 
+	}
+	public void throwBomb (){
+		heldBomb.GetComponent<Collider> ().isTrigger = true;
+		heldBomb.AddComponent<Rigidbody> ();
+		heldBomb.GetComponent<Rigidbody> ().useGravity = true;
+		heldBomb.GetComponent<Rigidbody> ().AddForce (transform.forward*15f+Vector3.up*8f, ForceMode.VelocityChange);
+		heldBomb.transform.parent = null;
+		heldBomb.GetComponent<Bomb>().setThrown();
+	}
 
-	//}
+	public bool getHeldBomb(){
+		if (heldBomb == null)
+			return false;
+		return true;
+	}
+
+	public bool heldBombThrown(){
+		if (heldBomb.GetComponent<Bomb> ().getThrown ())
+			return true;
+		return false;
+	}
 
     public void Move(){
         Vector3 lookAt = new Vector3(inputs.x, 0.0f, inputs.y);
         transform.forward = lookAt;
-        rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+		rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime * playerMovementModifier);
     }
 
 	public void Jump(){
-        rb.AddForce(Vector3.up * 10f, ForceMode.VelocityChange);
+		rb.AddForce(Vector3.up * 20f * playerMovementModifier, ForceMode.VelocityChange);
 	}
 
-    public void GetHit()
+	public void GetHit(float bombCharge, Vector3 bombPosition)
     {
         prevRot = transform.localRotation;
         isStunned = true;
         rb.constraints = RigidbodyConstraints.None;
+		rb.AddExplosionForce(500f*bombCharge, bombPosition, 100f, 5f);
+
+		if (heldBomb != null && !heldBombThrown()) {
+			Destroy (heldBomb);
+		}
     }
 
     public void Recover(){
@@ -103,4 +122,9 @@ public class Player : MonoBehaviour {
         //Renderer playerMesh = player.GetComponent<Renderer>();
         //transform.position = playerMesh.bounds.center;
     }
+
+	public int loseHealth(){
+		health -= 1;
+		return health;
+	}
 }

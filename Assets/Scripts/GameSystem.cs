@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class GameSystem : MonoBehaviour {
 	public Vector3 allyPlayerStartPosition;
 	public Vector3 axisPlayerStartPosition;
 
+	public float timeScaleModifier = 4.0f;
+
 	// Use this for initialization
 	void Start () {
 		allyPlayerObject = Instantiate (allyPlayerPrefab);
@@ -26,16 +29,17 @@ public class GameSystem : MonoBehaviour {
 		axisPlayer = axisPlayerObject.GetComponent<Player> ();
         allyAnimator = allyPlayerObject.GetComponent<Animator>();
         axisAnimator = axisPlayerObject.GetComponent<Animator>();
+		Time.timeScale = timeScaleModifier;
     }
 	
 	// Update is called once per frame
 	void Update () {
 		//Check if any Player fell off
 		if (allyPlayerObject.transform.position.y < minimumHeight){
-			FellOff (allyPlayerObject);
+			FellOff (allyPlayer);
 		}
 		if (axisPlayerObject.transform.position.y < minimumHeight){
-			FellOff (axisPlayerObject);
+			FellOff (axisPlayer);
 		}
 
         //Ally Player Movement
@@ -58,14 +62,15 @@ public class GameSystem : MonoBehaviour {
             {
                 allyPlayer.inputs.x += 1f;
             }
-            if (Input.GetKey(KeyCode.E))
+			if (Input.GetKey(KeyCode.E) && !allyPlayer.getHeldBomb())
             {
-                //allyPlayer.GrabBomb();
                 allyAnimator.SetBool("isCharging", true);
+				allyPlayer.grabBomb();
             }
-            if (Input.GetKeyUp(KeyCode.E))
+			if (Input.GetKeyUp(KeyCode.E) && allyPlayer.getHeldBomb() && !allyPlayer.heldBombThrown())
             {
                 allyAnimator.SetBool("isCharging", false);
+				allyPlayer.throwBomb();
             }
             if (allyPlayer.inputs != Vector2.zero)
             {
@@ -87,6 +92,7 @@ public class GameSystem : MonoBehaviour {
         else
         {
             allyAnimator.Play("Idle");
+			allyAnimator.SetBool("isCharging", false);
         }
 
         //Axis Player Movement
@@ -105,38 +111,42 @@ public class GameSystem : MonoBehaviour {
     		if (Input.GetKey (KeyCode.DownArrow)) {
                 axisPlayer.inputs.y -= 1f;
             }
-    		if (Input.GetKey (KeyCode.Period)) {
-                //axisPlayer.GrabBomb();
-                axisAnimator.SetBool("isCharging", true);
-            }
-            if (Input.GetKeyUp(KeyCode.Period))
-            {
-                axisAnimator.SetBool("isCharging", false);
-            }
-            if (axisPlayer.inputs != Vector2.zero)
-            {
-                axisPlayer.Move();
-                axisAnimator.SetBool("isWalking", true);
-            }
-            else
-            {
-                axisAnimator.SetBool("isWalking", false);
-            }
-            if (Input.GetKeyDown(KeyCode.Slash) && axisPlayer.isGrounded)
-            {
-                axisPlayer.Jump();
-                axisAnimator.SetTrigger("jump");
-            }
-            axisAnimator.SetBool("isGrounded", axisPlayer.isGrounded);
+			if (Input.GetKey(KeyCode.Period) && !axisPlayer.getHeldBomb())
+			{
+				axisAnimator.SetBool("isCharging", true);
+				axisPlayer.grabBomb();
+			}
+			if (Input.GetKeyUp(KeyCode.Period) && axisPlayer.getHeldBomb() && !axisPlayer.heldBombThrown())
+			{
+				axisAnimator.SetBool("isCharging", false);
+				axisPlayer.throwBomb();
+			}
+			if (axisPlayer.inputs != Vector2.zero)
+			{
+				axisPlayer.Move();
+				axisAnimator.SetBool("isWalking", true);
+			}
+			else
+			{
+				axisAnimator.SetBool("isWalking", false);
+			}
+			if (Input.GetKeyDown(KeyCode.Slash) && axisPlayer.isGrounded)
+			{
+				axisPlayer.Jump();
+				axisAnimator.SetTrigger("jump");
+			}
+			axisAnimator.SetBool("isGrounded", axisPlayer.isGrounded);
         }
         else
         {
+			axisAnimator.SetBool("isCharging", false);
             axisAnimator.Play("Idle");
         }
     }
 		
-	private void FellOff(GameObject player){
-
+	private void FellOff(Player player){
+		player.loseHealth();
+		SceneManager.LoadScene("StartScreen");
 	}
 
 	private void WinGame(GameObject player){
