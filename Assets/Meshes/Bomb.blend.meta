@@ -4,11 +4,20 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Bomb
+    100004: Fuse
     400000: //RootNode
+    400002: Bomb
+    400004: Fuse
     2100000: Material
     2300000: //RootNode
+    2300002: Bomb
+    2300004: Fuse
     3300000: //RootNode
+    3300002: Bomb
+    3300004: Fuse
     4300000: Bomb
+    4300002: Fuse
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
