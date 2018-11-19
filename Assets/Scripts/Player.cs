@@ -68,7 +68,7 @@ public class Player : MonoBehaviour {
     public void grabBomb(){
 		//if (heldBomb == null) {
 			heldBomb = Instantiate (bombPrefab, this.transform);
-			heldBomb.transform.localPosition = new Vector3(0, 8, 1);
+			heldBomb.transform.localPosition = new Vector3(0f, 8.5f, 1f);
 		//} 
 	}
 	public void throwBomb (){
@@ -127,4 +127,12 @@ public class Player : MonoBehaviour {
 		health -= 1;
 		return health;
 	}
+
+    public void setSelectedBomb(GameObject selectedBomb){
+        bombPrefab = selectedBomb;
+    }
+
+    public GameObject getSelectedBomb(){
+        return bombPrefab;
+    }
 }
