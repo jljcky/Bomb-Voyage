@@ -789,7 +789,8 @@ MonoBehaviour:
   inputs: {x: 0, y: 0}
   isStunned: 0
   isGrounded: 0
-  bombPrefab: {fileID: 1538409527846304, guid: 0df25c6999e3cf34a84a0edee5de3a77, type: 2}
+  defaultBombPrefab: {fileID: 1538409527846304, guid: 0df25c6999e3cf34a84a0edee5de3a77,
+    type: 2}
   playerMovementModifier: 0.4
 --- !u!136 &136383630589260174
 CapsuleCollider:

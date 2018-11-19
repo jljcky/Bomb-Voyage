@@ -17,7 +17,8 @@ public class Player : MonoBehaviour {
     private float stunned = 1f;
     private float stunnedCD = 0f;
 
-	public GameObject bombPrefab;
+	public GameObject defaultBombPrefab;
+    private GameObject specialBomb;
 	private GameObject heldBomb;
 
 	public float playerMovementModifier = 0.4f;
@@ -66,10 +67,15 @@ public class Player : MonoBehaviour {
 
     //Grab Bomb, and if already holding then throw
     public void grabBomb(){
-		//if (heldBomb == null) {
-			heldBomb = Instantiate (bombPrefab, this.transform);
-			heldBomb.transform.localPosition = new Vector3(0f, 8.5f, 1f);
-		//} 
+        if (specialBomb == null)
+        {
+            heldBomb = Instantiate(defaultBombPrefab, this.transform);
+        }
+        else {
+            heldBomb = Instantiate(specialBomb, this.transform);
+            specialBomb = null;
+        }
+		heldBomb.transform.localPosition = new Vector3(0f, 8.5f, 1f);
 	}
 	public void throwBomb (){
 		heldBomb.GetComponent<Collider> ().isTrigger = true;
@@ -104,7 +110,8 @@ public class Player : MonoBehaviour {
 
 	public void GetHit(float bombCharge, Vector3 bombPosition)
     {
-        prevRot = transform.localRotation;
+        if (!isStunned)
+            prevRot = transform.localRotation;
         isStunned = true;
         rb.constraints = RigidbodyConstraints.None;
 		rb.AddExplosionForce(500f*bombCharge, bombPosition, 100f, 5f);
@@ -129,10 +136,10 @@ public class Player : MonoBehaviour {
 	}
 
     public void setSelectedBomb(GameObject selectedBomb){
-        bombPrefab = selectedBomb;
+        specialBomb = selectedBomb;
     }
 
     public GameObject getSelectedBomb(){
-        return bombPrefab;
+        return specialBomb;
     }
 }
