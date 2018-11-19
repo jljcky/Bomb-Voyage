@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour {
     public GameObject explosion;
+    public string type;
 
-	private float bombCharge;
+    private float bombCharge;
 	private float maxCharge = 2;
 
 	private bool isThrown = false;
