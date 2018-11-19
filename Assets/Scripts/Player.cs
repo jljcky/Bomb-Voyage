@@ -81,7 +81,8 @@ public class Player : MonoBehaviour {
 		heldBomb.GetComponent<Collider> ().isTrigger = true;
 		heldBomb.AddComponent<Rigidbody> ();
 		heldBomb.GetComponent<Rigidbody> ().useGravity = true;
-		heldBomb.GetComponent<Rigidbody> ().AddForce (transform.forward*15f+Vector3.up*8f, ForceMode.VelocityChange);
+        float bombCharge = heldBomb.GetComponent<Bomb>().getBombCharge();
+        heldBomb.GetComponent<Rigidbody> ().AddForce (transform.forward*(5f+20f*(bombCharge-1f))+Vector3.up*8f, ForceMode.VelocityChange);
 		heldBomb.transform.parent = null;
 		heldBomb.GetComponent<Bomb>().setThrown();
 	}

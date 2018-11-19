@@ -19,7 +19,7 @@ public class Bomb : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Increase Bomb Charges
-        if (bombCharge < maxCharge)
+        if (bombCharge < maxCharge && !isThrown)
         {
             bombCharge += 0.1f * Time.deltaTime;
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, (bombCharge-1f)/(maxCharge-1f));
@@ -56,4 +56,8 @@ public class Bomb : MonoBehaviour {
 	public bool getThrown(){
 		return isThrown;
 	}
+
+    public float getBombCharge(){
+        return bombCharge;
+    }
 }
