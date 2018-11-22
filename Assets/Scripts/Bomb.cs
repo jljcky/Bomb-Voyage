@@ -24,7 +24,7 @@ public class Bomb : MonoBehaviour {
             bombCharge += 0.1f * Time.deltaTime;
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, (bombCharge-1f)/(maxCharge-1f));
         }
-		if (this.transform.position.y <= 0) {
+        if (this.transform.position.y <= GameSystem.minimumHeight) {
 			GameObject e = Instantiate (explosion, transform.position, transform.rotation);
 			Destroy (gameObject);
 		}

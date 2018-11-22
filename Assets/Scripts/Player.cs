@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
-
 	private int health;
     private float speed;
 	private Rigidbody rb;
@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
     private float stunned = 1f;
     private float stunnedCD = 0f;
 
+    public GameObject hearts;
+    public GameObject heart;
+
 	public GameObject defaultBombPrefab;
     private GameObject specialBomb;
 	private GameObject heldBomb;
@@ -27,7 +30,10 @@ public class Player : MonoBehaviour {
 	void Start () {
         health = 5;
         speed = 20f;
-		rb = gameObject.GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
+        for (int i = 0; i < health; i++){
+            GameObject h = Instantiate(heart, hearts.transform);
+        }
     }
 
 
@@ -56,7 +62,7 @@ public class Player : MonoBehaviour {
         ContactPoint[] contacts = collision.contacts;
         foreach (ContactPoint contact in contacts)
         {
-            isGrounded |= contact.otherCollider.tag == "Terrain";
+            isGrounded |= contact.otherCollider.gameObject.layer == 10;
         }
     }
 
@@ -134,6 +140,7 @@ public class Player : MonoBehaviour {
 
 	public int loseHealth(){
 		health -= 1;
+        hearts.transform.GetChild(health).gameObject.SetActive(false);
 		return health;
 	}
 
@@ -143,5 +150,21 @@ public class Player : MonoBehaviour {
 
     public GameObject getSelectedBomb(){
         return specialBomb;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void refresh()
+    {
+        isStunned = false;
+        stunnedCD = 0f;
+        specialBomb = null;
+        if (heldBomb != null){
+            Destroy(heldBomb);
+        }
+        rb.velocity = Vector3.zero;
+        Recover();
     }
 }

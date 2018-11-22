@@ -13,7 +13,7 @@ public class GameSystem : MonoBehaviour {
 	private Player axisPlayer;
     private Animator allyAnimator;
     private Animator axisAnimator;
-	private int minimumHeight = 0;
+	public static int minimumHeight = -1;
 	public Vector3 allyPlayerStartPosition;
 	public Vector3 axisPlayerStartPosition;
 
@@ -21,8 +21,10 @@ public class GameSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		allyPlayerObject = Instantiate (allyPlayerPrefab);
-		axisPlayerObject = Instantiate (axisPlayerPrefab);
+        //allyPlayerObject = Instantiate (allyPlayerPrefab);
+        //axisPlayerObject = Instantiate (axisPlayerPrefab);
+        allyPlayerObject = allyPlayerPrefab;
+        axisPlayerObject = axisPlayerPrefab;
         allyPlayerObject.transform.position = allyPlayerStartPosition;
         axisPlayerObject.transform.position = axisPlayerStartPosition;
         allyPlayer = allyPlayerObject.GetComponent<Player> ();
@@ -33,15 +35,41 @@ public class GameSystem : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-		//Check if any Player fell off
-		if (allyPlayerObject.transform.position.y < minimumHeight){
-			FellOff (allyPlayer);
-		}
-		if (axisPlayerObject.transform.position.y < minimumHeight){
-			FellOff (axisPlayer);
-		}
+	void Update ()
+    {
+        //Check if any Player fell off
+        if (allyPlayerObject.transform.position.y < minimumHeight)
+        {
+            FellOff(allyPlayer);
+            print(allyPlayerObject.transform.position.y);
+            if (allyPlayer.getHealth() <= 0)
+            {
+                WinGame("Axis Player");
+            }
+            else
+            {
+                allyPlayerObject.transform.position = allyPlayerStartPosition;
+                allyAnimator.SetBool("isCharging", false);
+                allyPlayer.refresh();
+            }
+        }
 
+        if (axisPlayerObject.transform.position.y < minimumHeight)
+        {
+            FellOff(axisPlayer);
+            //print("axis fell off");
+            print(axisPlayerObject.transform.position.y);
+            if (axisPlayer.getHealth() <= 0)
+            {
+                WinGame("Ally Player");
+            }
+            else
+            {
+                axisPlayerObject.transform.position = axisPlayerStartPosition;
+                axisAnimator.SetBool("isCharging", false);
+                axisPlayer.refresh();
+            }
+        }
         //Ally Player Movement
         if (!allyPlayer.isStunned)
         {
@@ -148,14 +176,13 @@ public class GameSystem : MonoBehaviour {
             axisAnimator.Play("Idle");
         }
     }
-		
-	private void FellOff(Player player){
+
+    private void FellOff(Player player){
 		player.loseHealth();
-		SceneManager.LoadScene("StartScreen");
 	}
 
-	private void WinGame(GameObject player){
-
+	private void WinGame(string player){
+		SceneManager.LoadScene("StartScreen");
 	}
 
 }
