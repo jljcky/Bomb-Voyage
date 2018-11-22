@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     private float speed;
 	private Rigidbody rb;
 
-    public Vector2 inputs;
+    //public Vector2 inputs;
 
     public bool isStunned = false;
     public bool isGrounded = false;
@@ -99,8 +99,9 @@ public class Player : MonoBehaviour {
 		return false;
 	}
 
-    public void Move(){
-        Vector3 lookAt = new Vector3(inputs.x, 0.0f, inputs.y);
+    public void Move(float x, float y){
+        //Vector3 lookAt = new Vector3(inputs.x, 0.0f, inputs.y);
+        Vector3 lookAt = new Vector3(x, 0.0f, y);
         transform.forward = lookAt;
 		rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime * playerMovementModifier);
     }

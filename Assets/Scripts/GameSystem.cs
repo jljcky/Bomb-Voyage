@@ -45,24 +45,27 @@ public class GameSystem : MonoBehaviour {
         //Ally Player Movement
         if (!allyPlayer.isStunned)
         {
-            allyPlayer.inputs = Vector2.zero;
+            //allyPlayer.inputs = Vector2.zero;
+            Vector2 inputs = Vector2.zero;
             if (Input.GetKey(KeyCode.W))
             {
-                allyPlayer.inputs.y += 1f;
+                inputs.y += 1f;
             }
             if (Input.GetKey(KeyCode.A))
             {
-                allyPlayer.inputs.x -= 1f;
+                inputs.x -= 1f;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                allyPlayer.inputs.y -= 1f;
+                inputs.y -= 1f;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                allyPlayer.inputs.x += 1f;
+                inputs.x += 1f;
             }
-			if (Input.GetKey(KeyCode.E) && !allyPlayer.getHeldBomb())
+            //float x = Input.GetAxis("Ally Horizontal");
+            //float y = Input.GetAxis("Ally Vertical");
+            if (Input.GetKey(KeyCode.E) && !allyPlayer.getHeldBomb())
             {
                 allyAnimator.SetBool("isCharging", true);
 				allyPlayer.grabBomb();
@@ -72,9 +75,9 @@ public class GameSystem : MonoBehaviour {
                 allyAnimator.SetBool("isCharging", false);
 				allyPlayer.throwBomb();
             }
-            if (allyPlayer.inputs != Vector2.zero)
+            if (inputs != Vector2.zero)
             {
-                allyPlayer.Move();
+                allyPlayer.Move(inputs.x, inputs.y);
                 allyAnimator.SetBool("isWalking", true);
             }
             else
@@ -98,19 +101,21 @@ public class GameSystem : MonoBehaviour {
         //Axis Player Movement
         if (!axisPlayer.isStunned)
         {
-            axisPlayer.inputs = Vector2.zero;
+            Vector2 inputs = Vector2.zero;
             if (Input.GetKey (KeyCode.UpArrow)) {
-                axisPlayer.inputs.y += 1f;
+                  inputs.y += 1f;
             }
-    		if (Input.GetKey (KeyCode.LeftArrow)) {
-                axisPlayer.inputs.x -= 1f;
+            if (Input.GetKey (KeyCode.LeftArrow)) {
+                inputs.x -= 1f;
             }
-    		if (Input.GetKey (KeyCode.RightArrow)) {
-                axisPlayer.inputs.x += 1f;
+            if (Input.GetKey (KeyCode.RightArrow)) {
+                inputs.x += 1f;
             }
-    		if (Input.GetKey (KeyCode.DownArrow)) {
-                axisPlayer.inputs.y -= 1f;
+            if (Input.GetKey (KeyCode.DownArrow)) {
+                inputs.y -= 1f;
             }
+            //float x = Input.GetAxis("Axis Horizontal");
+            //float y = Input.GetAxis("Axis Vertical");
 			if (Input.GetKey(KeyCode.Period) && !axisPlayer.getHeldBomb())
 			{
 				axisAnimator.SetBool("isCharging", true);
@@ -121,9 +126,9 @@ public class GameSystem : MonoBehaviour {
 				axisAnimator.SetBool("isCharging", false);
 				axisPlayer.throwBomb();
 			}
-			if (axisPlayer.inputs != Vector2.zero)
+			if (inputs != Vector2.zero)
 			{
-				axisPlayer.Move();
+				axisPlayer.Move(inputs.x, inputs.y);
 				axisAnimator.SetBool("isWalking", true);
 			}
 			else
