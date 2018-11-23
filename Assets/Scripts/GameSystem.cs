@@ -13,7 +13,7 @@ public class GameSystem : MonoBehaviour {
 	private Player axisPlayer;
     private Animator allyAnimator;
     private Animator axisAnimator;
-	public static int minimumHeight = -1;
+	public static int minimumHeight = -50;
 	public Vector3 allyPlayerStartPosition;
 	public Vector3 axisPlayerStartPosition;
 
@@ -41,7 +41,6 @@ public class GameSystem : MonoBehaviour {
         if (allyPlayerObject.transform.position.y < minimumHeight)
         {
             FellOff(allyPlayer);
-            print(allyPlayerObject.transform.position.y);
             if (allyPlayer.getHealth() <= 0)
             {
                 WinGame("Axis Player");
@@ -57,8 +56,6 @@ public class GameSystem : MonoBehaviour {
         if (axisPlayerObject.transform.position.y < minimumHeight)
         {
             FellOff(axisPlayer);
-            //print("axis fell off");
-            print(axisPlayerObject.transform.position.y);
             if (axisPlayer.getHealth() <= 0)
             {
                 WinGame("Ally Player");

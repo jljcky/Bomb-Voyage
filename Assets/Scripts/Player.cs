@@ -23,6 +23,8 @@ public class Player : MonoBehaviour {
 	public GameObject defaultBombPrefab;
     private GameObject specialBomb;
 	private GameObject heldBomb;
+    public GameObject specialSlot;
+    private GameObject specialSlotItem;
 
 	public float playerMovementModifier = 0.4f;
 
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour {
         else {
             heldBomb = Instantiate(specialBomb, this.transform);
             specialBomb = null;
+            Destroy(specialSlotItem);
         }
 		heldBomb.transform.localPosition = new Vector3(0f, 8.5f, 1f);
 	}
@@ -122,7 +125,7 @@ public class Player : MonoBehaviour {
             prevRot = transform.localRotation;
         isStunned = true;
         rb.constraints = RigidbodyConstraints.None;
-		rb.AddExplosionForce(500f*bombCharge, bombPosition, 100f, 5f);
+        rb.AddExplosionForce(500f*bombCharge, bombPosition, 100f*bombCharge, 5f);
 
 		if (heldBomb != null && !heldBombThrown()) {
 			Destroy (heldBomb);
@@ -132,10 +135,6 @@ public class Player : MonoBehaviour {
     public void Recover(){
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         transform.localRotation = prevRot;
-        //set position
-        //Transform player = transform.Find("Player");
-        //Renderer playerMesh = player.GetComponent<Renderer>();
-        //transform.position = playerMesh.bounds.center;
     }
 
 	public int loseHealth(){
@@ -144,8 +143,13 @@ public class Player : MonoBehaviour {
 		return health;
 	}
 
-    public void setSelectedBomb(GameObject selectedBomb){
+    public void setSelectedBomb(GameObject item, GameObject selectedBomb){
         specialBomb = selectedBomb;
+        Destroy(specialSlotItem);
+        specialSlotItem = Instantiate(item, specialSlot.transform);
+        specialSlotItem.transform.localPosition = Vector3.zero;
+        Destroy(specialSlotItem.GetComponent<Rigidbody>());
+        Destroy(specialSlotItem.GetComponent<Item>());
     }
 
     public GameObject getSelectedBomb(){
@@ -161,9 +165,8 @@ public class Player : MonoBehaviour {
         isStunned = false;
         stunnedCD = 0f;
         specialBomb = null;
-        if (heldBomb != null){
-            Destroy(heldBomb);
-        }
+        Destroy(heldBomb);
+        Destroy(specialSlotItem);
         rb.velocity = Vector3.zero;
         Recover();
     }

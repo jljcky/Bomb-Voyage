@@ -25,7 +25,7 @@ public class Item : MonoBehaviour {
     {
         if (other.gameObject.layer == 9)
         {
-            other.gameObject.GetComponent<Player>().setSelectedBomb(bombPrefab);
+            other.gameObject.GetComponent<Player>().setSelectedBomb(this.gameObject, bombPrefab);
             Destroy(gameObject);
         }
         else if (other.gameObject.layer == 10)
