@@ -116,7 +116,7 @@ public class Player : MonoBehaviour {
     }
 
 	public void Jump(){
-		rb.AddForce(Vector3.up * 20f * playerMovementModifier, ForceMode.VelocityChange);
+		rb.AddForce(Vector3.up * 40f * playerMovementModifier, ForceMode.VelocityChange);
 	}
 
 	public void GetHit(float bombCharge, Vector3 bombPosition)

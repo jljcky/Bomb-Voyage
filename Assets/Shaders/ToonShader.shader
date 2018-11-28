@@ -71,6 +71,8 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            #include "AutoLight.cginc"
             
             sampler2D _MainTex;
             float4 _Color;
@@ -98,6 +100,7 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
                 o.norm = UnityObjectToWorldNormal(v.norm);
+                TRANSFER_SHADOW(o)
 				return o;
 			}
 			
@@ -106,12 +109,9 @@
 				// sample the texture
                 float diff = step(_Threshold, dot(_WorldSpaceLightPos0, i.norm));
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
+                fixed shadow = SHADOW_ATTENUATION(i);
                 fixed4 shade = _ShadeColor * (1-diff) + fixed4(1,1,1,1) * diff;
-                //fixed4 shade = unity_AmbientSky * (1-diff) + fixed4(1,1,1,1) * diff;
-                col.r *= shade.r;
-                col.g *= shade.g;
-                col.b *= shade.b;
-                col.a *= shade.a; 
+                col.rgba *= shade;
 				return col;
 			}
 			ENDCG
@@ -119,32 +119,5 @@
         
         //shadows
         UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
-        //Pass
-        //{
-        //    Tags {"LightMode"="ShadowCaster"}
-
-        //    CGPROGRAM
-        //    #pragma vertex vert
-        //    #pragma fragment frag
-        //    #pragma multi_compile_shadowcaster
-        //    #include "UnityCG.cginc"
-
-        //    struct v2f { 
-        //        V2F_SHADOW_CASTER;
-        //    };
-
-        //    v2f vert(appdata_base v)
-        //    {
-        //        v2f o;
-        //        TRANSFER_SHADOW_CASTER_NORMALOFFSET(o)
-        //        return o;
-        //    }
-
-        //    float4 frag(v2f i) : SV_Target
-        //    {
-        //        SHADOW_CASTER_FRAGMENT(i)
-        //    }
-        //    ENDCG
-        //}
 	}
 }
