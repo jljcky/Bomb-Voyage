@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4016737446432964
 Transform:
   m_ObjectHideFlags: 1
@@ -89,7 +89,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9b3e8bc2dd9c245c4a813bfcbd76619a, type: 3}
+  - {fileID: 2100000, guid: f475cf6617f654d28b6e0f39ab78d329, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300744ce7317a4d74b191407dccf1e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 0}
+  bombPrefab: {fileID: 1361201752579106, guid: f05f954621eb74e4f8d709d032ff327c, type: 2}
   itemTimeModifier: 0.25
 --- !u!122 &122780864934992424
 Halo:

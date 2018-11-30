@@ -12,7 +12,9 @@ public class Landmine : Bomb {
 		else if (other.gameObject.layer == 10){
 			GameObject newMine = Instantiate (this.gameObject);
 			Destroy (newMine.GetComponent<Rigidbody>());
-			Destroy (gameObject);
+            newMine.GetComponent<Landmine>().setThrown();
+            newMine.GetComponent<Landmine>().setBombCharge(bombCharge);
+            Destroy (gameObject);
 		}
 		else {
 			explode();

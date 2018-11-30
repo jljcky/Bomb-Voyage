@@ -56,6 +56,10 @@ public class Bomb : MonoBehaviour {
 		return isThrown;
 	}
 
+    public void setBombCharge(float bc){
+        bombCharge = bc;
+    }
+
     public float getBombCharge(){
         return bombCharge;
     }

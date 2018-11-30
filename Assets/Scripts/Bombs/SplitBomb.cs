@@ -33,10 +33,10 @@ public class SplitBomb : Bomb {
 		GameObject split4 = Instantiate (normalBombPrefab);
 		makeBomb (split4);
 
-		split1.transform.position += transform.forward * seperationDistance + transform.up * upDistance; 
-		split2.transform.position += -transform.forward * seperationDistance + transform.up * upDistance; 
-		split3.transform.position += transform.right * seperationDistance + transform.up * upDistance;  
-		split4.transform.position += -transform.right * seperationDistance + transform.up * upDistance; 
+		split1.transform.position = transform.position + transform.forward * seperationDistance + transform.up * upDistance; 
+		split2.transform.position = transform.position + -transform.forward * seperationDistance + transform.up * upDistance; 
+		split3.transform.position = transform.position + transform.right * seperationDistance + transform.up * upDistance;  
+		split4.transform.position = transform.position + -transform.right * seperationDistance + transform.up * upDistance; 
 
 		split1.GetComponent<Rigidbody> ().AddForce (transform.forward * thrust  + Vector3.up * lift, ForceMode.VelocityChange);
 		split2.GetComponent<Rigidbody> ().AddForce (-transform.forward * thrust  + Vector3.up * lift, ForceMode.VelocityChange);

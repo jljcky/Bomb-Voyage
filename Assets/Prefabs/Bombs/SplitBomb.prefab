@@ -87,7 +87,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9b3e8bc2dd9c245c4a813bfcbd76619a, type: 3}
+  - {fileID: 2100000, guid: f475cf6617f654d28b6e0f39ab78d329, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,5 +138,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.420343
-  m_Center: {x: 0, y: 0.118710995, z: -0.09894025}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
