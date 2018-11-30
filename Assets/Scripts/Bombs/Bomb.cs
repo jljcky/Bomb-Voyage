@@ -49,7 +49,7 @@ public class Bomb : MonoBehaviour {
         }
     }
 
-    private void explode(){
+	protected virtual void explode(){
         Collider[] collidersNearby = Physics.OverlapSphere(transform.position, 8f * bombCharge);
         foreach (Collider c in collidersNearby)
         {
