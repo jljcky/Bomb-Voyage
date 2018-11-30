@@ -14,8 +14,9 @@ public class Player : MonoBehaviour {
     public bool isGrounded = false;
     private Quaternion prevRot;
 
-    private float stunned = 1f;
-    private float stunnedCD = 0f;
+    private float stunned =0f;
+    private float stunnedCD = -2f;
+	private float slowedDuration = 0f;
 
     public GameObject hearts;
     public GameObject heart;
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour {
         speed = 20f;
 		rb = GetComponent<Rigidbody>();
         for (int i = 0; i < health; i++){
-            GameObject h = Instantiate(heart, hearts.transform);
+            Instantiate(heart, hearts.transform);
         }
     }
 
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour {
             if (stunnedCD >= stunned)
             {
                 isStunned = false;
-                stunnedCD = 0f;
+                stunnedCD = -2f;
                 Recover();
             }
             else
@@ -54,8 +55,10 @@ public class Player : MonoBehaviour {
                 stunnedCD += Time.deltaTime;
             }
         }else{
-            stunnedCD = 0f;
+            stunnedCD = -2f;
         }
+		if (slowedDuration > 0f)
+			slowedDuration -= Time.deltaTime;
     }
 
     //if we want to use a raycast then we dont need these collision events
@@ -107,12 +110,17 @@ public class Player : MonoBehaviour {
 			return true;
 		return false;
 	}
-
+		
     public void Move(float x, float y){
         //Vector3 lookAt = new Vector3(inputs.x, 0.0f, inputs.y);
         Vector3 lookAt = new Vector3(x, 0.0f, y);
         transform.forward = lookAt;
-		rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime * playerMovementModifier);
+		if (slowedDuration > 0f) {
+			rb.MovePosition (transform.position + transform.forward * speed / 4f * Time.deltaTime * playerMovementModifier);
+		}
+		else {
+			rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime * playerMovementModifier);
+		}
     }
 
 	public void Jump(){
@@ -131,6 +139,14 @@ public class Player : MonoBehaviour {
 			Destroy (heldBomb);
 		}
     }
+
+	public void setStunnedcd(float cd){
+		stunnedCD = cd;
+	}
+
+	public void makeSlow(float duration){
+		slowedDuration = duration;
+	}
 
     public void Recover(){
         rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -163,7 +179,7 @@ public class Player : MonoBehaviour {
     public void refresh()
     {
         isStunned = false;
-        stunnedCD = 0f;
+        stunnedCD = -2f;
         specialBomb = null;
         Destroy(heldBomb);
         Destroy(specialSlotItem);

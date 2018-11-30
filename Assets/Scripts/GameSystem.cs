@@ -21,8 +21,6 @@ public class GameSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //allyPlayerObject = Instantiate (allyPlayerPrefab);
-        //axisPlayerObject = Instantiate (axisPlayerPrefab);
         allyPlayerObject = allyPlayerPrefab;
         axisPlayerObject = axisPlayerPrefab;
         allyPlayerObject.transform.position = allyPlayerStartPosition;
@@ -88,8 +86,6 @@ public class GameSystem : MonoBehaviour {
             {
                 inputs.x += 1f;
             }
-            //float x = Input.GetAxis("Ally Horizontal");
-            //float y = Input.GetAxis("Ally Vertical");
             if (Input.GetKey(KeyCode.E) && !allyPlayer.getHeldBomb())
             {
                 allyAnimator.SetBool("isCharging", true);
@@ -139,8 +135,6 @@ public class GameSystem : MonoBehaviour {
             if (Input.GetKey (KeyCode.DownArrow)) {
                 inputs.y -= 1f;
             }
-            //float x = Input.GetAxis("Axis Horizontal");
-            //float y = Input.GetAxis("Axis Vertical");
 			if (Input.GetKey(KeyCode.Period) && !axisPlayer.getHeldBomb())
 			{
 				axisAnimator.SetBool("isCharging", true);

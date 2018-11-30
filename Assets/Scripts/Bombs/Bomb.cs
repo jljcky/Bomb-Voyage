@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour {
     public GameObject explosion;
-    public string type;
 
-    private float bombCharge;
-	private float maxCharge = 2;
+    protected float bombCharge;
+	protected float maxCharge = 2;
 
-	private bool isThrown = false;
+	protected bool isThrown = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,12 +24,12 @@ public class Bomb : MonoBehaviour {
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, (bombCharge-1f)/(maxCharge-1f));
         }
         if (this.transform.position.y <= GameSystem.minimumHeight) {
-			GameObject e = Instantiate (explosion, transform.position, transform.rotation);
+			Instantiate (explosion, transform.position, transform.rotation);
 			Destroy (gameObject);
 		}
 	}
 
-    void OnTriggerEnter(Collider other)
+	protected virtual void OnTriggerEnter(Collider other)
     {
         explode();
     }

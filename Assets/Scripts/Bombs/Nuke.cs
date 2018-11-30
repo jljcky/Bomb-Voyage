@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowBomb : Bomb {
+public class Nuke : Bomb {
 
 	protected override void explode(){
-		Collider[] collidersNearby = Physics.OverlapSphere(transform.position, 8f * bombCharge);
+		Collider[] collidersNearby = Physics.OverlapSphere(transform.position, 999f);
 		foreach (Collider c in collidersNearby)
 		{
-			if (c.gameObject.layer == 9)
+			if (c.gameObject.layer == 10)
 			{
-				c.GetComponent<Player> ().makeSlow (15f);
+				Destroy (c.gameObject);
 			}
 		}
 		GameObject e = Instantiate(explosion, transform.position, transform.rotation);
-		e.transform.localScale = Vector3.one * bombCharge;
+		e.transform.localScale = Vector3.one * 99f;
 		Destroy(gameObject);
 	}
 

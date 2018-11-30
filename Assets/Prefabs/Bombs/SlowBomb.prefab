@@ -70,8 +70,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4167871314848480}
-  - component: {fileID: 114852745309901862}
   - component: {fileID: 135019891640074856}
+  - component: {fileID: 114527131014064060}
   m_Layer: 0
   m_Name: SlowBomb
   m_TagString: Untagged
@@ -218,7 +218,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783826760884072}
   m_Mesh: {fileID: 4300000, guid: 0cce4c8cf1c384d59bea9b1f3209b09f, type: 3}
---- !u!114 &114852745309901862
+--- !u!114 &114527131014064060
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,11 +226,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864636022077580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dcfd7a5dcdc45c6a69d9be1cc77181, type: 3}
+  m_Script: {fileID: 11500000, guid: 00f97560e44341d44a3f3c216c3adf89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1079965940738696, guid: 05be6c4adfc17455394049c4c87864a7, type: 2}
-  type: slow
 --- !u!135 &135019891640074856
 SphereCollider:
   m_ObjectHideFlags: 1
