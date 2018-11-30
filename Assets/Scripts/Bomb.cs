@@ -32,7 +32,21 @@ public class Bomb : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        explode();
+        switch (type)
+        {
+            case "bomb":
+                explode();
+                break;
+            case "freeze":
+                freeze();
+                break;
+            case "fire":
+                break;
+            case "slow":
+                break;
+            default:
+                break;
+        }
     }
 
     private void explode(){
@@ -49,7 +63,23 @@ public class Bomb : MonoBehaviour {
         Destroy(gameObject);
     }
 
-	public void setThrown(){
+    private void freeze()
+    {
+        Collider[] collidersNearby = Physics.OverlapSphere(transform.position, 8f * bombCharge);
+        foreach (Collider c in collidersNearby)
+        {
+            if (c.gameObject.layer == 9)
+            {
+                //c.GetComponent<Player>().GetHit(bombCharge, transform.position);
+                c.GetComponent<Player>().isStunned = true;
+            }
+        }
+        GameObject e = Instantiate(explosion, transform.position, transform.rotation);
+        e.transform.localScale = Vector3.one * bombCharge;
+        Destroy(gameObject);
+    }
+
+    public void setThrown(){
 		isThrown = true;
 	}
 
