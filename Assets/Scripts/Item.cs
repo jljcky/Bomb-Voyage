@@ -25,6 +25,7 @@ public class Item : MonoBehaviour {
     {
         if (other.gameObject.layer == 9)
         {
+            transform.rotation = Quaternion.identity;
             other.gameObject.GetComponent<Player>().setSelectedBomb(this.gameObject, bombPrefab);
             Destroy(gameObject);
         }

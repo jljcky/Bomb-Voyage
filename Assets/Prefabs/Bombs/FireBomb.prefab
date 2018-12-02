@@ -70,8 +70,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4266750929107520}
-  - component: {fileID: 114864933567975496}
   - component: {fileID: 135941329860103142}
+  - component: {fileID: 114465720701830206}
   m_Layer: 0
   m_Name: FireBomb
   m_TagString: Untagged
@@ -218,7 +218,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1599075261272360}
   m_Mesh: {fileID: 4300002, guid: 0cce4c8cf1c384d59bea9b1f3209b09f, type: 3}
---- !u!114 &114864933567975496
+--- !u!114 &114465720701830206
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,11 +226,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1930065112883696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dcfd7a5dcdc45c6a69d9be1cc77181, type: 3}
+  m_Script: {fileID: 11500000, guid: 090d6d5c14340e44b9bff525c6822d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 1079965940738696, guid: 05be6c4adfc17455394049c4c87864a7, type: 2}
-  type: bomb
+  explosion: {fileID: 0}
 --- !u!135 &135941329860103142
 SphereCollider:
   m_ObjectHideFlags: 1

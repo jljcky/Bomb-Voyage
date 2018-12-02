@@ -230,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1543259242982624, guid: c7b563ceadb0f4aaeaf8c712d4b30632, type: 2}
-  type: freeze
 --- !u!135 &135236590807894668
 SphereCollider:
   m_ObjectHideFlags: 1

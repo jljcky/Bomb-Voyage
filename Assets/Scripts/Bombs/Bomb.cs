@@ -16,7 +16,7 @@ public class Bomb : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		//Increase Bomb Charges
         if (bombCharge < maxCharge && !isThrown)
         {

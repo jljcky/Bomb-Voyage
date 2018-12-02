@@ -16,6 +16,8 @@ public class GameSystem : MonoBehaviour {
 	public static int minimumHeight = -50;
 	public Vector3 allyPlayerStartPosition;
 	public Vector3 axisPlayerStartPosition;
+    public GameObject AllyWin;
+    public GameObject AxisWin;
 
 	public float timeScaleModifier = 4.0f;
 
@@ -30,6 +32,8 @@ public class GameSystem : MonoBehaviour {
         allyAnimator = allyPlayerObject.GetComponent<Animator>();
         axisAnimator = axisPlayerObject.GetComponent<Animator>();
 		Time.timeScale = timeScaleModifier;
+        AllyWin.SetActive(false);
+        AxisWin.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -41,7 +45,8 @@ public class GameSystem : MonoBehaviour {
             FellOff(allyPlayer);
             if (allyPlayer.getHealth() <= 0)
             {
-                WinGame("Axis Player");
+                allyPlayerObject.transform.position = new Vector3(0f, 999f, 0f);
+                WinGame(AxisWin);
             }
             else
             {
@@ -56,7 +61,9 @@ public class GameSystem : MonoBehaviour {
             FellOff(axisPlayer);
             if (axisPlayer.getHealth() <= 0)
             {
-                WinGame("Ally Player");
+                axisPlayerObject.transform.position = new Vector3(0f, 999f, 0f);
+                WinGame(AllyWin);
+                StartCoroutine(DelayReturnMenu(3f));
             }
             else
             {
@@ -172,8 +179,14 @@ public class GameSystem : MonoBehaviour {
 		player.loseHealth();
 	}
 
-	private void WinGame(string player){
-		SceneManager.LoadScene("StartScreen");
-	}
+	private void WinGame(GameObject WinPanel){
+        Time.timeScale = 0f;
+        WinPanel.SetActive(true);
+    }
 
+    private IEnumerator DelayReturnMenu(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        SceneManager.LoadScene("StartScreen");
+    }
 }
