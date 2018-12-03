@@ -11,7 +11,7 @@ public class FreezeBomb : Bomb {
 			if (c.gameObject.layer == 9)
 			{
 				c.GetComponent<Player> ().isStunned = true;
-				c.GetComponent<Player> ().setStunnedcd (-5f);
+				c.GetComponent<Player> ().setStunnedcd (-5f, transform.Find("Bomb").GetComponent<Renderer>().material);
 			}
 		}
 		GameObject e = Instantiate(explosion, transform.position, transform.rotation);

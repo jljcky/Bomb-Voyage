@@ -27,6 +27,9 @@ public class Player : MonoBehaviour {
     public GameObject specialSlot;
     private GameObject specialSlotItem;
 
+    private Material prevMaterial;
+    //private Material currentMaterial;
+
 	public float playerMovementModifier = 0.4f;
 
 	// Use this for initialization
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < health; i++){
             Instantiate(heart, hearts.transform);
         }
+        prevMaterial = transform.Find("Player").GetComponent<Renderer>().material;
     }
 
 
@@ -57,8 +61,6 @@ public class Player : MonoBehaviour {
         }else{
             stunnedCD = -2f;
         }
-		if (slowedDuration > 0f)
-			slowedDuration -= Time.deltaTime;
     }
 
     //if we want to use a raycast then we dont need these collision events
@@ -140,17 +142,35 @@ public class Player : MonoBehaviour {
 		}
     }
 
-	public void setStunnedcd(float cd){
+	public void setStunnedcd(float cd, Material freezeMat){
 		stunnedCD = cd;
-	}
+        transform.Find("Player").GetComponent<Renderer>().material = freezeMat;
 
-	public void makeSlow(float duration){
+    }
+
+	public void makeSlow(float duration, Material slowMat){
 		slowedDuration = duration;
-	}
+        StartCoroutine(slowTime(slowMat));
+    }
+
+    private IEnumerator slowTime(Material slowMat)
+    {
+        transform.Find("Player").GetComponent<Renderer>().material = slowMat;
+        while (slowedDuration > 0f)
+        {
+            slowedDuration -= Time.deltaTime;
+            yield return null;
+        }
+        transform.Find("Player").GetComponent<Renderer>().material = prevMaterial;
+    }
 
     public void Recover(){
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         transform.localRotation = prevRot;
+        if (!prevMaterial.Equals(transform.Find("Player").GetComponent<Renderer>().material) && slowedDuration <= 0f)
+        {
+            transform.Find("Player").GetComponent<Renderer>().material = prevMaterial;
+        }
     }
 
 	public int loseHealth(){

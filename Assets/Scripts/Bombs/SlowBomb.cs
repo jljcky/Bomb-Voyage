@@ -10,7 +10,7 @@ public class SlowBomb : Bomb {
 		{
 			if (c.gameObject.layer == 9)
 			{
-				c.GetComponent<Player> ().makeSlow (15f);
+				c.GetComponent<Player> ().makeSlow (15f, transform.Find("Bomb").GetComponent<Renderer>().material);
 			}
 		}
 		GameObject e = Instantiate(explosion, transform.position, transform.rotation);
