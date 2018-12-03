@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Landmine : Bomb {
-
-	protected override void OnTriggerEnter (Collider other)
+    protected override void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.layer == 9) {
 			explode ();
