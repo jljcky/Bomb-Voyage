@@ -5,15 +5,15 @@ using UnityEngine;
 public class Bomb : MonoBehaviour {
     public GameObject explosion;
 
-    protected float bombCharge;
+    protected float bombCharge = 1f;
 	protected float maxCharge = 2;
 
 	protected bool isThrown = false;
 
 	// Use this for initialization
-	void Start () {
-        bombCharge = 1f;
-	}
+	//void Start () {
+ //       bombCharge = 1f;
+	//}
 	
 	// Update is called once per frame
 	protected virtual void Update () {

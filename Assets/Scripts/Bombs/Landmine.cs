@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Landmine : Bomb {
+    protected override void Update()
+    {
+        base.Update();
+        print(this.bombCharge);
+    }
+
     protected override void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject.layer == 9) {
-			explode ();
+		if (other.gameObject.layer == 9)
+        {
+            explode ();
 		} 
 		else if (other.gameObject.layer == 10){
 			GameObject newMine = Instantiate (this.gameObject);
 			Destroy (newMine.GetComponent<Rigidbody>());
-            newMine.GetComponent<Landmine>().setThrown();
-            newMine.GetComponent<Landmine>().setBombCharge(bombCharge);
-            Destroy (gameObject);
-		}
-		else {
-			explode();
+            newMine.GetComponent<Bomb>().setBombCharge(this.bombCharge);
+            newMine.GetComponent<Bomb>().setThrown();
+            Destroy(gameObject);
 		}
 	}
 
