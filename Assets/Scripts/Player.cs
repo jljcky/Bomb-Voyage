@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     private float stunned =0f;
     private float stunnedCD = -2f;
 	private float slowedDuration = 0f;
+    private float burnDuration = 0f;
 
     public GameObject hearts;
     public GameObject heart;
@@ -90,7 +91,12 @@ public class Player : MonoBehaviour {
             Destroy(specialSlotItem);
         }
 		heldBomb.transform.localPosition = new Vector3(0f, 8.5f, 1f);
-	}
+
+        if (burnDuration > 0f)
+        {
+            heldBomb.GetComponent<Bomb>().burnExplode();
+        }
+    }
 	public void throwBomb (){
 		heldBomb.GetComponent<Collider> ().isTrigger = true;
 		heldBomb.AddComponent<Rigidbody> ();
@@ -149,6 +155,7 @@ public class Player : MonoBehaviour {
     }
 
 	public void makeSlow(float duration, Material slowMat){
+        StopCoroutine("slowTime");
 		slowedDuration = duration;
         StartCoroutine(slowTime(slowMat));
     }
@@ -159,6 +166,25 @@ public class Player : MonoBehaviour {
         while (slowedDuration > 0f)
         {
             slowedDuration -= Time.deltaTime;
+            yield return null;
+        }
+        transform.Find("Player").GetComponent<Renderer>().material = prevMaterial;
+    }
+
+
+    public void makeBurned(float duration, Material fireMat)
+    {
+        StopCoroutine("burnTime");
+        burnDuration = duration;
+        StartCoroutine(burnTime(fireMat));
+    }
+
+    private IEnumerator burnTime(Material fireMat)
+    {
+        transform.Find("Player").GetComponent<Renderer>().material = fireMat;
+        while (burnDuration > 0f)
+        {
+            burnDuration -= Time.deltaTime;
             yield return null;
         }
         transform.Find("Player").GetComponent<Renderer>().material = prevMaterial;
@@ -199,7 +225,10 @@ public class Player : MonoBehaviour {
     public void refresh()
     {
         isStunned = false;
+        isGrounded = false;
         stunnedCD = -2f;
+        slowedDuration = 0f;
+        burnDuration = 0f;
         specialBomb = null;
         Destroy(heldBomb);
         Destroy(specialSlotItem);

@@ -6,7 +6,6 @@ public class Landmine : Bomb {
     protected override void Update()
     {
         base.Update();
-        print(this.bombCharge);
     }
 
     protected override void OnTriggerEnter (Collider other)

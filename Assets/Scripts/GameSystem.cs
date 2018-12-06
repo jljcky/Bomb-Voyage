@@ -18,6 +18,10 @@ public class GameSystem : MonoBehaviour {
 	public Vector3 axisPlayerStartPosition;
     public GameObject AllyWin;
     public GameObject AxisWin;
+    public GameObject Draw;
+
+    private bool isAllyWin = false;
+    private bool isAxisWin = false;
 
 	public float timeScaleModifier = 4.0f;
 
@@ -34,6 +38,7 @@ public class GameSystem : MonoBehaviour {
 		Time.timeScale = timeScaleModifier;
         AllyWin.SetActive(false);
         AxisWin.SetActive(false);
+        Draw.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -46,7 +51,7 @@ public class GameSystem : MonoBehaviour {
             if (allyPlayer.getHealth() <= 0)
             {
                 allyPlayerObject.transform.position = new Vector3(0f, 999f, 0f);
-                WinGame(AxisWin);
+                isAxisWin = true;
             }
             else
             {
@@ -62,8 +67,7 @@ public class GameSystem : MonoBehaviour {
             if (axisPlayer.getHealth() <= 0)
             {
                 axisPlayerObject.transform.position = new Vector3(0f, 999f, 0f);
-                WinGame(AllyWin);
-                StartCoroutine(DelayReturnMenu(3f));
+                isAllyWin = true;
             }
             else
             {
@@ -72,6 +76,23 @@ public class GameSystem : MonoBehaviour {
                 axisPlayer.refresh();
             }
         }
+
+        if (isAllyWin && isAxisWin)
+        {
+            StartCoroutine(DelayReturnMenu(3f, Draw));
+            enabled = false;
+        }
+        else if (isAllyWin)
+        {
+            StartCoroutine(DelayReturnMenu(3f, AllyWin));
+            enabled = false;
+        }
+        else if (isAxisWin)
+        {
+            StartCoroutine(DelayReturnMenu(3f, AxisWin));
+            enabled = false;
+        }
+
         //Ally Player Movement
         if (!allyPlayer.isStunned)
         {
@@ -179,13 +200,41 @@ public class GameSystem : MonoBehaviour {
 		player.loseHealth();
 	}
 
-	private void WinGame(GameObject WinPanel){
+	//private void WinGame(GameObject WinPanel){
+    //    Time.timeScale = 0f;
+    //    WinPanel.SetActive(true);
+    //}
+
+    private IEnumerator DelayReturnMenu(float seconds, GameObject WinPanel)
+    {
+        Vector3 localScale = WinPanel.transform.localScale;
         Time.timeScale = 0f;
         WinPanel.SetActive(true);
-    }
-
-    private IEnumerator DelayReturnMenu(float seconds)
-    {
+        WinPanel.transform.localScale = Vector3.zero;
+        print(WinPanel.transform.localScale);
+        float t = 0f;
+        while (t < 0.1f)
+        {
+            WinPanel.transform.localScale = Vector3.Lerp(Vector3.zero, localScale * 1.2f, t / 0.1f);
+            t += Time.unscaledDeltaTime;
+            yield return new WaitForSecondsRealtime(Time.unscaledDeltaTime);
+        }
+        t = 0f;
+        Vector3 currentScale = WinPanel.transform.localScale;
+        while (t < 0.1)
+        {
+            WinPanel.transform.localScale = Vector3.Lerp(currentScale, localScale * 0.6f, t / 0.1f);
+            t += Time.unscaledDeltaTime;
+            yield return new WaitForSecondsRealtime(Time.unscaledDeltaTime);
+        }
+        t = 0f;
+        currentScale = WinPanel.transform.localScale;
+        while (t < 0.1)
+        {
+            WinPanel.transform.localScale = Vector3.Lerp(currentScale, localScale, t / 0.1f);
+            t += Time.unscaledDeltaTime;
+            yield return new WaitForSecondsRealtime(Time.unscaledDeltaTime);
+        }
         yield return new WaitForSecondsRealtime(seconds);
         SceneManager.LoadScene("StartScreen");
     }
