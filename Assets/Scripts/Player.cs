@@ -230,7 +230,8 @@ public class Player : MonoBehaviour {
         slowedDuration = 0f;
         burnDuration = 0f;
         specialBomb = null;
-        Destroy(heldBomb);
+        if (heldBomb != null && !heldBomb.GetComponent<Bomb>().getThrown())
+            Destroy(heldBomb);
         Destroy(specialSlotItem);
         rb.velocity = Vector3.zero;
         Recover();
