@@ -8,6 +8,9 @@ public class Player : MonoBehaviour {
     private float speed;
 	private Rigidbody rb;
 
+	public AudioSource jumpClip;
+	public AudioSource throwClip;
+
     //public Vector2 inputs;
 
     public bool isStunned = false;
@@ -98,6 +101,7 @@ public class Player : MonoBehaviour {
         }
     }
 	public void throwBomb (){
+		throwClip.Play ();
 		heldBomb.GetComponent<Collider> ().isTrigger = true;
 		heldBomb.AddComponent<Rigidbody> ();
 		heldBomb.GetComponent<Rigidbody> ().useGravity = true;
@@ -132,6 +136,7 @@ public class Player : MonoBehaviour {
     }
 
 	public void Jump(){
+		jumpClip.Play ();
 		rb.AddForce(Vector3.up * 40f * playerMovementModifier, ForceMode.VelocityChange);
 	}
 
