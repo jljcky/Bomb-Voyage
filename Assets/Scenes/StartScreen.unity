@@ -3589,6 +3589,8 @@ MonoBehaviour:
 
     - Split Bomb: On impact splits into four smaller bombs that spread out
 
+    - Cube Bomb: Creates a cube on impact
+
     - Nuke: Destroys terrain'
 --- !u!222 &1797203605
 CanvasRenderer:
