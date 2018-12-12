@@ -4626,6 +4626,8 @@ MonoBehaviour:
     rate: 15
   - item: {fileID: 1623512612838730, guid: af8e35e6c8cce8a4ebbcbf4da506dccd, type: 2}
     rate: 1
+  dropLocations:
+  - {fileID: 1434195487}
 --- !u!4 &2038821654
 Transform:
   m_ObjectHideFlags: 0
@@ -4633,7 +4635,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2038821652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 38.6, z: -22.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
