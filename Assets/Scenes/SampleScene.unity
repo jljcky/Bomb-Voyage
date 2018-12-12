@@ -4612,13 +4612,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 1919269337834684, guid: 32fc466f215f3304e9c9354c526e0f14, type: 2}
-  - {fileID: 1166715042450274, guid: c81978fc2385fe24382bd60d136cd090, type: 2}
-  - {fileID: 1247604727838114, guid: fcae7143c649b4eaea7fdcd01d516c08, type: 2}
-  - {fileID: 1764471832348906, guid: d63ff24c05eec4d069f9d604c4607807, type: 2}
-  - {fileID: 1888915679307934, guid: 6b13bcd5f64594f72969c16ba53c307e, type: 2}
-  - {fileID: 1914669946605270, guid: 1a4d00a4414d4ed4c9c7bfedab7e5133, type: 2}
-  - {fileID: 1623512612838730, guid: af8e35e6c8cce8a4ebbcbf4da506dccd, type: 2}
+  - item: {fileID: 1919269337834684, guid: 32fc466f215f3304e9c9354c526e0f14, type: 2}
+    rate: 50
+  - item: {fileID: 1166715042450274, guid: c81978fc2385fe24382bd60d136cd090, type: 2}
+    rate: 50
+  - item: {fileID: 1247604727838114, guid: fcae7143c649b4eaea7fdcd01d516c08, type: 2}
+    rate: 25
+  - item: {fileID: 1764471832348906, guid: d63ff24c05eec4d069f9d604c4607807, type: 2}
+    rate: 25
+  - item: {fileID: 1888915679307934, guid: 6b13bcd5f64594f72969c16ba53c307e, type: 2}
+    rate: 25
+  - item: {fileID: 1914669946605270, guid: 1a4d00a4414d4ed4c9c7bfedab7e5133, type: 2}
+    rate: 15
+  - item: {fileID: 1623512612838730, guid: af8e35e6c8cce8a4ebbcbf4da506dccd, type: 2}
+    rate: 1
 --- !u!4 &2038821654
 Transform:
   m_ObjectHideFlags: 0
