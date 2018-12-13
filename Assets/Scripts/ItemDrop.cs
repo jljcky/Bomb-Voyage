@@ -14,7 +14,7 @@ public class ItemDrop : MonoBehaviour
     public ItemDropData[] items;
     public MeshRenderer[] dropLocations;
     //private Vector3 center;
-    private float itemDropTime = 0.5f;
+    private float itemDropTime = 4f;
     private float itemCDTime = 0f;
 	
 	// Update is called once per frame
