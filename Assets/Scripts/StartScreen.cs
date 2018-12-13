@@ -15,16 +15,12 @@ public class StartScreen : MonoBehaviour {
     {
         SceneManager.LoadScene("Bowl");
     }
-    public void PlayMap4()
-    {
-
-    }
     public void PlayMap5()
     {
-
+        SceneManager.LoadScene("MovingIslands");
     }
     public void PlayMap6()
     {
-
+        SceneManager.LoadScene("RainingBombs");
     }
 }

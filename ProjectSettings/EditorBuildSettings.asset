@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bowl.unity
     guid: 5404cc315501a428ca587170146dfb87
+  - enabled: 1
+    path: Assets/Scenes/MovingIslands.unity
+    guid: 49482d577aae448ac894f715baef5fd3
+  - enabled: 1
+    path: Assets/Scenes/RainingBombs.unity
+    guid: 373775d4e1c7e485bae66da2861859fc
   m_configObjects: {}
